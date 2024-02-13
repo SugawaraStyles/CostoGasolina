@@ -1,24 +1,23 @@
 package com.mexiti.costogasolina
 
-import androidx.test.platform.app.InstrumentationRegistry
-import androidx.test.ext.junit.runners.AndroidJUnit4
-
 import org.junit.Test
-import org.junit.runner.RunWith
-
 import org.junit.Assert.*
 
-/**
- * Instrumented test, which will execute on an Android device.
- *
- * See [testing documentation](http://d.android.com/tools/testing).
- */
-@RunWith(AndroidJUnit4::class)
-class ExampleInstrumentedTest {
+class GasolinaUnitTest {
     @Test
-    fun useAppContext() {
-        // Context of the app under test.
-        val appContext = InstrumentationRegistry.getInstrumentation().targetContext
-        assertEquals("com.mexiti.costogasolina", appContext.packageName)
+    fun testCalculoGasolina_sinPropina() {
+        val precioLitro = 22.35
+        val litros = 40.0
+        val total = calcularMonto(precioLitro, litros, darPropina = false, propina = 0.0)
+        assertEquals("$894.00", total)
+    }
+
+    @Test
+    fun testCalculoGasolina_conPropina() {
+        val precioLitro = 22.35
+        val litros = 40.0
+        val propina = 10.0
+        val total = calcularMonto(precioLitro, litros, darPropina = true, propina = propina)
+        assertEquals("$904.00", total)
     }
 }
